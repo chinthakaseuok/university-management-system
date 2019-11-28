@@ -4,16 +4,26 @@ public class Lecturer {
     private int age;
     private String userName;
     private String password;
+    private String course;
 
     public Lecturer() {
     }
 
-    public Lecturer(int id, String name, int age, String userName, String password) {
+    public Lecturer(int id, String name, int age, String userName, String password, String course) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.userName = userName;
         this.password = password;
+        this.course = course;
+    }
+
+    public String getCourse() {
+        return course;
+    }
+
+    public void setCourse(String course) {
+        this.course = course;
     }
 
     public int getId() {

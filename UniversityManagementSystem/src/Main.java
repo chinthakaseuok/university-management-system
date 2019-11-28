@@ -109,40 +109,83 @@ public class Main {
 
 
             case 2:
-                System.out.println("Lecturer Registration");
-                System.out.println("");
-                System.out.println("Please Submit following information");
-                System.out.println("1:  Name:");
-                name=input.next();
-                System.out.println("2:  Age:");
-                age=input.nextInt();
-                System.out.println("3: Select course number from following list,");
-                System.out.println("[1]"+modules.SENG1111_Introduction_to_Programming);
-                System.out.println("[2]"+modules.SENG1112_Fndamantales_of_Engineering);
-                System.out.println("[3]"+modules.SENG1113_Data_Structures_and_Algorithms);
-                course=input.nextInt();
-                Lecturer lecturer=new Lecturer();
-                switch (course){
-                    case 1:
-                        sub.setSubName(modules.SENG1111_Introduction_to_Programming);
+                System.out.println("Select [1] for Sign up, [2} for sign in");
+                sop=input.nextInt();
+                switch (sop) {
 
-                        break;
-                    case 2:
-                        sub.setSubName(modules.SENG1112_Fndamantales_of_Engineering);
-                        break;
-                    case 3:
-                        sub.setSubName(modules.SENG1113_Data_Structures_and_Algorithms);
-                        break;
+                    case 1:
+                    System.out.println("Lecturer Registration");
+                    System.out.println("");
+                    System.out.println("Please Submit following information");
+                        System.out.println("Lecturer ID:");
+                        id = input.nextInt();
+                        System.out.println("1:  Name:");
+                        input.nextLine();
+                        name = input.nextLine();
+                        System.out.println("2:  Age:");
+                        age = input.nextInt();
+                        System.out.println("User name:");
+                        userName = input.next();
+                        System.out.println("Password:");
+                        password = input.next();
+                    System.out.println("3: Select course number from following list,");
+                    System.out.println("[1]" + modules.SENG1111_Introduction_to_Programming);
+                    System.out.println("[2]" + modules.SENG1112_Fndamantales_of_Engineering);
+                    System.out.println("[3]" + modules.SENG1113_Data_Structures_and_Algorithms);
+                    course = input.nextInt();
+                    Lecturer lecturer = new Lecturer();
+                    switch (course) {
+                        case 1:
+                            sub.setSubName(modules.SENG1111_Introduction_to_Programming);
+                            lecturer.setCourse(String.valueOf(modules.SENG1111_Introduction_to_Programming));
+                            break;
+                        case 2:
+                            sub.setSubName(modules.SENG1112_Fndamantales_of_Engineering);
+                            lecturer.setCourse(String.valueOf(modules.SENG1112_Fndamantales_of_Engineering));
+                            break;
+                        case 3:
+                            sub.setSubName(modules.SENG1113_Data_Structures_and_Algorithms);
+                            lecturer.setCourse(String.valueOf(modules.SENG1113_Data_Structures_and_Algorithms));
+                            break;
                         default:
+                    }
+                    lecturer.setName(name);
+                    lecturer.setAge(age);
+                    lecturer.setId(id);
+                    lecturer.setUserName(userName);
+                    lecturer.setPassword(password);
+                        PreparedStatement stm = connection.prepareStatement("Insert Into Lecturer Values(?,?,?,?,?,?);");
+                        stm.setObject(1, lecturer.getId());
+                        stm.setObject(2, lecturer.getName());
+                        stm.setObject(3, lecturer.getAge());
+                        stm.setObject(4, lecturer.getUserName());
+                        stm.setObject(5, lecturer.getPassword());
+                        stm.setObject(6, lecturer.getCourse());
+                        stm.executeUpdate();
+                    System.out.println("Lecturer Registration Completed");
+                    System.out.println("Name    :" + lecturer.getName());
+                    System.out.println("Age     :" + lecturer.getAge());
+                    System.out.println("Subject :" + sub.getSubName());
+                    break;
+                    case 2:
+                        System.out.println("Lecturer Login form");
+
+                        System.out.println("User Name:");
+                        userName=input.next();
+                        System.out.println("Password:");
+                        password=input.next();
+
+                        Statement  stmt=connection.createStatement();
+                        ResultSet   rs=stmt.executeQuery( "select * from Lecturer where userName='"+userName+"'and password='"+password+"';");
+                        while (rs.next()) {
+                            System.out.println( "Hi " + rs.getString(2));
+                            System.out.println("You have successfully registered for this course:");
+                            System.out.println(" "+rs.getString(6));
+                        }
+                        break;
+                    default:
                 }
-                lecturer.setName(name);
-                lecturer.setAge(age);
-                System.out.println("Lecturer Registration Completed");
-                System.out.println("Name    :"+lecturer.getName());
-                System.out.println("Age     :"+lecturer.getAge());
-                System.out.println("Subject :"+sub.getSubName());
                 break;
-                default:
 
         }
 
