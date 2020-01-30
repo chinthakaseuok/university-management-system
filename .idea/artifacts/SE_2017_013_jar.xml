@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="SE_2017_013:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/SE_2017_013_jar</output-path>
+    <root id="archive" name="SE_2017_013.jar">
+      <element id="module-output" name="Chinthaka" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jre1.8.0_241/lib/ext/mysql-connector-java-8.0.18.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
